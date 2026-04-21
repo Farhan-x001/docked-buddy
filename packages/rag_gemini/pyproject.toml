@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rag-gemini"
+version = "0.1.0"
+description = "Reusable RAG + Gemini backend package for docs chat experiences"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "fastapi>=0.115.0",
+  "uvicorn[standard]>=0.30.0",
+  "pydantic>=2.8.0",
+  "python-multipart>=0.0.9",
+  "PyYAML>=6.0.1",
+  "pypdf>=4.3.0",
+  "python-docx>=1.1.2",
+  "scikit-learn>=1.5.1",
+  "google-generativeai>=0.7.2",
+  "google-auth>=2.33.0",
+  "motor>=3.5.1"
+]
+
+[project.scripts]
+rag-gemini-api = "rag_gemini.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

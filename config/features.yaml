@@ -1,0 +1,9 @@
+upload_enabled: true
+admin_only_upload: false
+browser_history_enabled: true
+mongodb_enabled: false
+allow_guest_chat: true
+model_name: gemini-flash-latest
+chunk_size: 900
+chunk_overlap: 180
+max_upload_mb: 20

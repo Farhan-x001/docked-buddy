@@ -1,0 +1,6 @@
+Can we just make this as React + Python?
+
+Goal:
+- Keep the app simple with a React frontend and a Python backend.
+- Remove extra complexity unless it is clearly needed.
+- Preserve the existing chat workflow and grounded AI behavior.
