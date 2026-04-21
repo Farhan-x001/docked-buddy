@@ -131,7 +131,8 @@ function usePersistentAppState() {
 }
 
 function AppContent() {
-  const apiBaseUrl = (import.meta.env.VITE_API_BASE_URL as string | undefined)?.trim() || 'http://localhost:8000';
+  const defaultApiBaseUrl = import.meta.env.PROD ? 'https://docked-buddy.onrender.com' : 'http://localhost:8000';
+  const apiBaseUrl = (import.meta.env.VITE_API_BASE_URL as string | undefined)?.trim() || defaultApiBaseUrl;
   const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID as string | undefined;
   const client = useMemo(
     () => (apiBaseUrl ? new RagGeminiClient({ baseUrl: apiBaseUrl }) : null),
