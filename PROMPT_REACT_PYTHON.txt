@@ -4,3 +4,93 @@ Goal:
 - Keep the app simple with a React frontend and a Python backend.
 - Remove extra complexity unless it is clearly needed.
 - Preserve the existing chat workflow and grounded AI behavior.
+--------
+Build the same notebook-style RAG chat workflow, but instead of extracting data from uploaded files, extract and index content from Confluence pages.
+
+Goal:
+- Keep the same overall product experience:
+  - workspace sidebar
+  - conversations
+  - chat over knowledge sources
+  - document/source inspector
+  - clean Vercel-inspired UI
+  - local-first conversation history with optional backend sync
+- Change only the knowledge source:
+  - Confluence pages should be the source of truth instead of uploaded PDFs/DOCX/TXT files.
+
+Core requirements:
+1. Confluence integration
+- Connect to Confluence Cloud or Confluence Data Center via REST API.
+- Support authentication using:
+  - Confluence API token + email for Cloud, or
+  - personal access token / basic auth depending on instance.
+- Allow the user to configure:
+  - Confluence base URL
+  - space keys
+  - page IDs or CQL filters
+  - sync interval
+- Pull page title, page body, labels, space, last updated time, and page URL.
+
+2. Indexing pipeline
+- Fetch Confluence page content from the API.
+- Convert page bodies to clean text.
+- Chunk content for retrieval.
+- Store page metadata and chunks in the backend.
+- Support incremental sync using updated timestamps so only changed pages are re-indexed.
+
+3. Chat and retrieval
+- Preserve the same RAG chat behavior:
+  - user asks a question
+  - retrieve relevant chunks from Confluence pages
+  - answer with grounded responses
+  - include citations/source cards
+- Answers should reference the page title, section/snippet, and page URL.
+- If no relevant context exists, respond gracefully and ask the user to sync more pages.
+
+4. UI changes
+- Replace the “Upload” flow with a “Connect Confluence” / “Sync Pages” flow.
+- Show:
+  - connected Confluence workspace
+  - synced spaces/pages
+  - page sources in the inspector panel
+  - sync status and last sync time
+- Keep the same polished chat UI and local conversation history.
+
+5. Backend architecture
+- Keep the existing monorepo structure if possible.
+- Use FastAPI for the backend API.
+- Provide endpoints for:
+  - health
+  - features/settings
+  - connect/sync Confluence content
+  - list indexed pages
+  - chat
+  - conversations
+- Store conversations locally first, with optional MongoDB sync if already supported.
+
+6. Answer generation
+- Use Gemini for generation.
+- Use the same grounded-answer style:
+  - summarize
+  - explain
+  - compare
+  - generate practice questions
+  - create concept maps
+- Ensure the model only uses retrieved Confluence context when possible.
+
+7. Important UX behavior
+- The app should feel like NotebookLM for Confluence knowledge.
+- Make it easy to:
+  - select a space
+  - choose pages
+  - sync content
+  - ask questions immediately after sync
+- Show source cards for pages used in each answer.
+
+8. Deliverables
+- Implement the backend and frontend changes.
+- Add any needed configuration files and documentation.
+- Make sure the app runs cleanly with the existing dev commands.
+- Do not leave placeholder-only behavior unless absolutely necessary.
+
+Use a modern, clean architecture and keep the code immediately runnable.
