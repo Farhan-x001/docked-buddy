@@ -54,7 +54,7 @@ const DEFAULT_FEATURES: FeatureFlags = {
   browserHistoryEnabled: true,
   mongodbEnabled: false,
   allowGuestChat: true,
-  modelName: 'gemini-1.5-flash',
+  modelName: 'gemini-flash-latest',
   chunkSize: 900,
   chunkOverlap: 180,
   maxUploadMb: 20
