@@ -25,7 +25,7 @@ class FeatureFlags(ApiModel):
     browser_history_enabled: bool = True
     mongodb_enabled: bool = False
     allow_guest_chat: bool = True
-    model_name: str = "gemini-1.5-flash"
+    model_name: str = "gemini-flash-latest"
     chunk_size: int = 900
     chunk_overlap: int = 180
     max_upload_mb: int = 20
